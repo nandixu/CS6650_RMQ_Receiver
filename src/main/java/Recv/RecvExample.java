@@ -8,11 +8,11 @@ import java.nio.charset.StandardCharsets;
 
 public class RecvExample {
 
-    private final static String QUEUE_NAME = "hello";
+    private final static String QUEUE_NAME = "hello2";
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("18.236.115.154");
+        factory.setHost("18.237.102.104");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
