@@ -22,4 +22,5 @@ In this case, there are 200 threads running at the same time, and each of them w
 In this case, the conditions are the same as the previous one, with load balanced servlet running. The result is significantly higher than single servlet. The publish rate reaches above 1400/s, and the consumption rate is still much higher than the production rate. Therefore, the queue size remains at zero.
 
 ![1400Result](https://media.github.khoury.northeastern.edu/user/8909/files/8a5625e3-e6db-4519-9e1b-c9684e009418)
+
 The throughput also raised as the publish rate raised. The overall thoughput is around 1.467 requests/ms, which is 1467 requests/s, and matches the previous test result. 
