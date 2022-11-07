@@ -7,12 +7,20 @@ import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
 
 public class RecvThread implements Runnable {
 
     public static String IP_ADDRESS = "";
     public static String QUEUE_NAME = "hello";
+    public static BlockingQueue<String> queue;
+
+    public RecvThread(String IP_Address, String queueName, BlockingQueue<String> queue) {
+        this.IP_ADDRESS = IP_Address;
+        this.QUEUE_NAME = queueName;
+        this.queue = queue;
+    }
 
     public RecvThread(String IP_Address, String queueName) {
         this.IP_ADDRESS = IP_Address;
@@ -54,6 +62,13 @@ public class RecvThread implements Runnable {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + message + "'");
+
+            //Put message into the queue. (Assignment2 Requirement/could be deleted)
+            try {
+                queue.put(message);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         };
         try {
             channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });

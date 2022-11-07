@@ -13,13 +13,20 @@ public class SendThread implements Runnable{
     private final static String QUEUE_NAME = "hello";
     private final static int MESSAGE_COUNT = 1000;
     private static String RMQ_ADDRESS = "35.162.219.135";
+    private static String skier = "";
 
     public SendThread() {
     }
 
-    public SendThread(String IP_ARRESS) {
-        RMQ_ADDRESS = IP_ARRESS;
+    public SendThread(String IP_ADDRESS) {
+        RMQ_ADDRESS = IP_ADDRESS;
     }
+
+    public SendThread(String IP_ADDRESS, String skier) {
+        this.RMQ_ADDRESS = IP_ADDRESS;
+        this.skier = skier;
+    }
+
 
     @Override
     public void run() {
@@ -28,7 +35,7 @@ public class SendThread implements Runnable{
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-            String message = "Hello World!";
+            String message = skier;
 
             for (int i=0; i<MESSAGE_COUNT; i++) {
                 channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
