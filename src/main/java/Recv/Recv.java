@@ -11,8 +11,12 @@ public class Recv {
     public static int DEFAULT_EVENTS_AMOUNT = 200000;
 
     public static void main(String[] args) {
+        String jdbcURL = "jdbc:postgresql://localhost:5432/SkierEventInfoDB";
+        String username = "postgres";
+        String password = "xunandi";
+
         BlockingQueue<String> queue = new ArrayBlockingQueue<>(DEFAULT_EVENTS_AMOUNT);
-        RecvThread receive = new RecvThread(IP_ADDRESS, QUEUE_NAME, queue);
+        RecvThread receive = new RecvThread(IP_ADDRESS, QUEUE_NAME, queue, username, password, jdbcURL);
 
         for (int i=0; i<RECV_THREADS_COUNT; i++) {
             new Thread(receive).start();

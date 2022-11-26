@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="CS6650_RMQ_Receiver" />
         <module name="CS6650RabbitMQ" />
       </profile>
     </annotationProcessing>
