@@ -1,8 +1,15 @@
-# CS6650_RMQ_Receiver
+# CS6650_RMQ_Receiver (Assignment 3: Add Data Layer Included.)
 
 Link to the server which contains all the sender: https://github.khoury.northeastern.edu/nandi/CS6650.git
 Link to Client Repo: https://github.khoury.northeastern.edu/nandi/CS6650_Client.git
 
+## Assignment 3
+
+### Design Description
+In Assignment 3, a PostgreSQL database is added to this project. Previously, all the data received by the receiver is added to a hashmap. Now all the data will be parsed as a skier event and be added to a PostgreDatabase. In this way, the skier information is permanently saved and could be evaluated by input sql statement. 
+
+
+## Assignment 2
 ### Design Description
 This project contains a Send and Recv folders. 
 
