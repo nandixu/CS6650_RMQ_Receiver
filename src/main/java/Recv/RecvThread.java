@@ -34,8 +34,6 @@ public class RecvThread implements Runnable {
         this.IP_ADDRESS = IP_ADDRESS;
     }
 
-
-
     @Override
     public void run() {
         ConnectionFactory factory = new ConnectionFactory();
