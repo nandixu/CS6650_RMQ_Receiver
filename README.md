@@ -22,11 +22,15 @@ Some techniques I used to improve efficiency:
 
 
 ### Assignment 3 result
+
 Below is the RMQ processing result.
+
 ![A3Result1](https://media.github.khoury.northeastern.edu/user/8909/files/c7020820-a4ec-456d-9e93-bcbf53f133f0)
+
 The queue stays at 0, which is a good sign. It means all the messages delivered into RMQ is also delivered out instantly. I have tested this part with 1 single receiver thread, which results in an increasing queue size. The large amount of receiver thread must contribute a lot to efficiency. 
 
 ![A3Result2](https://media.github.khoury.northeastern.edu/user/8909/files/ea45c2a2-86c7-46a9-b556-19566793610b)
+
 It is expected that loading data into database would significantly increase the amount of time used to handle each request. In Assignment 1, the Throughput is 28 requests per second. In Assignment 2, the Throughput is roughly 1.47 request per second. In Assignment 3, it drops to 1.35 request per second. It is obvious that most of the time is spent with RMQ, where message is delivered in and deliverd out. Saving data into database would have minor influence on efficiency compared with RMQ process.
 
 ## Assignment 2
