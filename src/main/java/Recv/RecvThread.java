@@ -7,8 +7,11 @@ import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
+
+import static Recv.SkierDAO.addNewSkierByMessage;
 
 public class RecvThread implements Runnable {
 
@@ -63,11 +66,13 @@ public class RecvThread implements Runnable {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + message + "'");
 
-            //Put message into the queue. (Assignment2 Requirement/could be deleted)
+            //Evaluate the skier message and put it into the database.
+            //In Assignment 2, it was put into a hashmap
             try {
-                queue.put(message);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                ConnectionManager CM = new ConnectionManager();
+                addNewSkierByMessage(message, CM);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
         };
         try {

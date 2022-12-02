@@ -5,8 +5,8 @@ import java.util.concurrent.BlockingQueue;
 
 public class Recv {
 
-    public static String IP_ADDRESS = "35.89.140.129";
-    public static int RECV_THREADS_COUNT = 1;
+    public static String IP_ADDRESS = "54.186.190.125";
+    public static int RECV_THREADS_COUNT = 50;
     public static String QUEUE_NAME = "hello";
     public static int DEFAULT_EVENTS_AMOUNT = 200000;
 
