@@ -13,12 +13,16 @@ The Database part is composed of 3 parts. The PostSQL database currently is host
 Therefore, the overall process is built up. Client sent 200k message to the server, the server would generate corresponding messages and send them to the RMQ. The RMQ sends messages to the receivers as soon as possible, and there are 50 receiver threads waiting to receive the message. For any message that each thread received, it transform the message into proper data and put it into the database.
 
 Client threads amount = 200 threads;
+
 Reiceiver threads amount = 50 threads;
+
 Total message amount = 200k skier event message, generated randomly;
 
 Some techniques I used to improve efficiency:
+
 1. Create one connection with each receiver thread and use the single connection to load all data. 
-2. Eliminate unnecessary console output.
+2. 
+3. Eliminate unnecessary console output.
 
 
 ### Assignment 3 result
