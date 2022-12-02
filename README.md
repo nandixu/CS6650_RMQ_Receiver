@@ -6,8 +6,28 @@ Link to Client Repo: https://github.khoury.northeastern.edu/nandi/CS6650_Client.
 ## Assignment 3
 
 ### Design Description
-In Assignment 3, a PostgreSQL database is added to this project. Previously, all the data received by the receiver is added to a hashmap. Now all the data will be parsed as a skier event and be added to a PostgreDatabase. In this way, the skier information is permanently saved and could be evaluated by input sql statement. 
+In Assignment 3, a PostgreSQL database is added to this project. Previously, all the data received by the receiver is added to a hashmap. Now all the data will be parsed as a skier event and be added to a PostgreSQL Database. In this way, the skier information is permanently saved and could be evaluated by input sql statement. 
 
+The Database part is composed of 3 parts. The PostSQL database currently is hosted at local computer. The SkierDAO is the database access object which serves to provide access to the postgres database. Currently there is only one service called addNewSkierByMessage, which takes a string as an input, transform the string into proper skier data, and add the new skier to the database. The ConnectionManager component provides connection to the database at once, so the DAO would only create one connection and load multiple data, which would improve efficiency.
+
+Therefore, the overall process is built up. Client sent 200k message to the server, the server would generate corresponding messages and send them to the RMQ. The RMQ sends messages to the receivers as soon as possible, and there are 50 receiver threads waiting to receive the message. For any message that each thread received, it transform the message into proper data and put it into the database.
+
+Client threads amount = 200 threads;
+Reiceiver threads amount = 50 threads;
+Total message amount = 200k skier event message, generated randomly;
+
+Some techniques I used to improve efficiency:
+1. Create one connection with each receiver thread and use the single connection to load all data. 
+2. Eliminate unnecessary console output.
+
+
+### Assignment 3 result
+Below is the RMQ processing result.
+![A3Result1](https://media.github.khoury.northeastern.edu/user/8909/files/c7020820-a4ec-456d-9e93-bcbf53f133f0)
+The queue stays at 0, which is a good sign. It means all the messages delivered into RMQ is also delivered out instantly. I have tested this part with 1 single receiver thread, which results in an increasing queue size. The large amount of receiver thread must contribute a lot to efficiency. 
+
+![A3Result2](https://media.github.khoury.northeastern.edu/user/8909/files/ea45c2a2-86c7-46a9-b556-19566793610b)
+It is expected that loading data into database would significantly increase the amount of time used to handle each request. In Assignment 1, the Throughput is 28 requests per second. In Assignment 2, the Throughput is roughly 1.47 request per second. In Assignment 3, it drops to 1.35 request per second. It is obvious that most of the time is spent with RMQ, where message is delivered in and deliverd out. Saving data into database would have minor influence on efficiency compared with RMQ process.
 
 ## Assignment 2
 ### Design Description
