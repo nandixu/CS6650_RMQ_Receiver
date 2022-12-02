@@ -34,7 +34,7 @@ The queue stays at 0, which is a good sign. It means all the messages delivered 
 
 ![A3Result2](https://media.github.khoury.northeastern.edu/user/8909/files/ea45c2a2-86c7-46a9-b556-19566793610b)
 
-It is expected that loading data into database would significantly increase the amount of time used to handle each request. In Assignment 1, the Throughput is 28 requests per second. In Assignment 2, the Throughput is roughly 1.47 request per second. In Assignment 3, it drops to 1.35 request per second. It is obvious that most of the time is spent with RMQ, where message is delivered in and deliverd out. Saving data into database would have minor influence on efficiency compared with RMQ process.
+It is expected that loading data into database would significantly increase the amount of time used to handle each request. In Assignment 1, the Throughput is 28 requests per milisecond. In Assignment 2, the Throughput is roughly 1.47 request per milisecond. In Assignment 3, it drops to 1.35 request per milisecond. It is obvious that most of the time is spent with RMQ, where message is delivered in and deliverd out. Saving data into database would have minor influence on efficiency compared with RMQ process.
 
 ## Assignment 2
 ### Design Description
