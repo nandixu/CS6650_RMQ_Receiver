@@ -21,8 +21,7 @@ Total message amount = 200k skier event message, generated randomly;
 Some techniques I used to improve efficiency:
 
 1. Create one connection with each receiver thread and use the single connection to load all data. 
-2. 
-3. Eliminate unnecessary console output.
+2. Eliminate unnecessary console output.
 
 
 ### Assignment 3 result
